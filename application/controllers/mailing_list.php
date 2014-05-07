@@ -49,9 +49,7 @@ class Mailing_list extends CI_Controller
 	
 	public function add()
 	{//is a form to add a new record
-		
-		echo TEST;
-	
+
 		$this->load->helper('form');
 		$data['title'] = "Adding a record!";
 		$data['style'] = "cerulean.css";
@@ -70,17 +68,24 @@ class Mailing_list extends CI_Controller
 	{//will insert the data entered via add()
 		$this->load->model('Mailing_list_model');
 		$this->load->library('form_validation');
-		//$this->load->helper('url');	
-	
-		/*
-		echo '<pre>';
-		var_dump($_POST);
-		echo '</pre>';
-		*/
+		
+		//must have at least one validation rule to insert
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
 		
 		if($this->form_validation->run() == FALSE)
 		{//failed validation - send back to form
-			echo "insert failed!";
+			$this->load->helper('form');
+			$data['title'] = "Adding a record!";
+			$data['style'] = "cerulean.css";
+			$data['banner'] = "Data Entry Error!";
+			$data['copyright'] = "copyright goes here!";
+			$data['base_url'] = base_url();
+			$this->load->view('header',$data);
+			
+			//var_dump($data['query']);
+			$this->load->view('mailing_list/add_mailing_list',$data);
+			
+			$this->load->view('footer',$data);
 		}else{//insert data
 			$post = array(
 				'first_name' => $this->input->post('first_name'),

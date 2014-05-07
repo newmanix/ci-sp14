@@ -27,7 +27,12 @@
 			<li class="active"><a href="#" title="">Active Link</a></li>
 			<li>
 			<?php
-			 echo anchor('mailing_list',"Mailing List");
+			 echo anchor('mailing_list','Mailing List');
+			?>
+			</li>
+			<li>
+			<?php
+			 echo anchor('mailing_list/add','Add');
 			?>
 			</li>
 			<li><a href="#" title="">Other Link</a></li>
