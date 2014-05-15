@@ -102,8 +102,12 @@ class Mailing_list extends CI_Controller
 			
 			);
 			
-			$this->Mailing_list_model->insert($post);
-			echo "Data inserted?";
+			$id = $this->Mailing_list_model->insert($post);
+		
+			redirect('/mailing_list/view/' . $id);
+			
+			
+			//echo "Data inserted?";
 
 		}
 	}//end insert()
